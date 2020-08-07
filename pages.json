@@ -1,0 +1,121 @@
+{
+	"pages": [
+		// pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/tabBar/timer/timer",
+			"style": {
+				"navigationBarTitleText": "Timer",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "数据分析",
+							"fontSize": "14",
+							"width": "auto"
+						}]
+					}
+				}
+			}
+		},
+		{
+		    "path" : "pages/tabBar/history/history",
+		    "style" : {
+				"navigationBarTitleText": "历史记录",
+				"enablePullDownRefresh": true
+
+			}
+		},
+		{
+		    "path" : "pages/tabBar/my/my",
+		    "style" : {
+				"navigationBarTitleText": "个人中心"
+		
+			}
+		},
+		{
+			"path": "pages/component/personal/personal",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/my/feedback/feedback",
+			"style": {
+				"navigationBarTitleText": "问题反馈"
+			}
+		},
+		{
+			"path": "pages/my/about/about",
+			"style": {
+				"navigationBarTitleText": "关于"
+			}
+		},
+		{
+			"path": "pages/timer/visual/visual",
+			"style": {
+				"navigationBarTitleText": "数据分析"
+			}
+		},
+		{
+            "path" : "pages/my/login/login",
+			"style": {
+				"backgroundColorTop": "#5677FC",
+				"backgroundColorBottom": "#ffffff",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"bounce": "vertical",
+					"titleNView": {
+						"autoBackButton": false
+					}
+				}
+			}
+        },
+		{
+			"path": "pages/history/visual/visual",
+			"style": {
+				"navigationBarTitleText": "数据分析"
+			}
+		}
+    ],
+
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"tui-(.*)": "@/components/thorui/tui-$1/tui-$1.vue"
+		}
+	},
+	"globalStyle": {
+		"pageOrientation": "portrait",
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "Hello uniapp",
+		"navigationBarBackgroundColor": "#5677FC",
+		"backgroundColor": "#F8F8F8",
+		"backgroundColorTop": "#F4F5F6",
+		"backgroundColorBottom": "#F4F5F6",
+		"mp-360": {
+			"navigationStyle": "custom"
+		}
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#007AFF",
+		"borderStyle": "black",
+		"backgroundColor": "#F8F8F8",
+		"list": [{
+				"pagePath": "pages/tabBar/timer/timer",
+				"iconPath": "static/timer.png",
+				"selectedIconPath": "static/timerHL.png",
+				"text": "计时器"
+			}, {
+				"pagePath": "pages/tabBar/history/history",
+				"iconPath": "static/template.png",
+				"selectedIconPath": "static/templateHL.png",
+				"text": "历史记录"
+			}, {
+				"pagePath": "pages/tabBar/my/my",
+				"iconPath": "static/user.png",
+				"selectedIconPath": "static/userHL.png",
+				"text": "我的"
+			}
+		]
+	}
+}
