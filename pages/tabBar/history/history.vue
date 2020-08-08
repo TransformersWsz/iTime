@@ -74,10 +74,12 @@
 		},
 		
 		onReachBottom() {
+			console.log("on reach bottom");
+			this.setListData();
 			
-			setTimeout(() => {
-				this.setListData();
-			}, 300);
+			// setTimeout(() => {
+				
+			// }, 300);
 			
 		},
 		
@@ -219,10 +221,11 @@
 								}
 								else {
 									if (tmpData.length < this.limit) {
-										this.listLoadMoreText = "没有更多数据了!";
+										
 										this.showListLoadMore = false;
 									}
 									else {
+										this.listLoadMoreText = "上拉加载更多"
 										this.showListLoadMore = true;
 									}
 									tmpData = tmpData.map(item => {
@@ -290,11 +293,13 @@
 							this.offset = this.listData.length;
 							
 							if (tmpData.length < this.limit) {
+								console.log(tmpData.length, this.limit)
 								this.listLoadMoreText = "没有更多数据了!";
-								this.showListLoadMore = false;
+								
 							}
 							else {
-								this.showListLoadMore = true;
+								this.listLoadMoreText = "上拉加载更多";
+								
 							}
 						}
 					},
