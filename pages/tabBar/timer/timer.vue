@@ -11,9 +11,9 @@
 			
 			<view class="under-charts">{{time}}</view>
 			
-			<view class="uni-flex uni-row" style="-webkit-justify-content: center;justify-content: center;">
-				<button class="test" type="primary" @tap="leftBtnTapped">{{leftBtnText}}</button>
+			<view class="uni-flex uni-row" style="-webkit-justify-content: center;justify-content: center; margin-top: -15rpx;">
 				<button class="test" type="warn" @tap="rightBtnTapped">{{rightBtnText}}</button>
+				<button class="test" type="primary" @tap="leftBtnTapped">{{leftBtnText}}</button>
 			</view>
 		</view>
 		
@@ -463,9 +463,9 @@
 	.test {
 		margin-top: 8rpx;
 		width: 220rpx;
-		height: 75rpx;
-		line-height: 75rpx;
-		font-size: 30rpx;
+		height: 86rpx;
+		line-height: 86rpx;
+		font-size: 35rpx;
 	}
 	
 	.operation {
@@ -473,8 +473,9 @@
 		justify-content: center;
 		align-items: center;
 		width: 20%;
-		height: 80%;
-		margin-right: 10rpx;
+		height: 76%;
+		margin-left: 5rpx;
+		margin-right: 5rpx;
 		font-size: 30rpx;
 	}	
 

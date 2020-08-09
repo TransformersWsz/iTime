@@ -74,13 +74,14 @@ function copyToClipboard(recordData) {
 	let max_min_avg_mid = compute(recordData);
 	max_min_avg_mid = max_min_avg_mid.map(item => ms2msm(item).slice(0, 8));
 	
-	const statistic = `最大值：${max_min_avg_mid[0]}\t最小值：${max_min_avg_mid[1]}\t平均值：${max_min_avg_mid[2]}\t中位数：${max_min_avg_mid[3]}`;
-	let strData = recordData.map(item => `计次 ${item.count}\t\t${ms2msm(item.gap).slice(0, 8)}`);
+	const statistic = `最大值\t\t${max_min_avg_mid[0]}\n最小值\t\t${max_min_avg_mid[1]}\n中位数\t\t${max_min_avg_mid[3]}\n平均值\t\t${max_min_avg_mid[2]}\n总计次\t\t${recordData.length}`;
+	let strData = recordData.map(item => `计次 ${item.count}\t\t${ms2msm(item.gap).slice(0, 8)}`); 
 	let copyData = []
 	for (let i = 0; i < strData.length; i++) {
-		copyData.push(`${strData[i]}\t\t${statistic}`);
+		copyData.push(`${strData[i]}`);
 	}
 	copyData = copyData.reverse().join("\n");
+	copyData = `${statistic}\n${copyData}`;
 	uni.setClipboardData({
 		data: copyData,
 		success: () => {

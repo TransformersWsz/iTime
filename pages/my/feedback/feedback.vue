@@ -85,9 +85,22 @@
                     })
                     return
                 }
+				uni.setStorageSync("hasSubmit", 0);
                 uni.showLoading({
-                    title: '正在提交...'
-                })
+                    title: '正在提交...',
+					mask: true
+                });
+				setTimeout(()=>{
+					const submitRes = uni.getStorageSync("hasSubmit");
+					uni.hideLoading();
+					if (submitRes == 0) {
+						uni.showModal({
+							title: "提交失败",
+							content: "网络异常，请稍后再试",
+							showCancel: false
+						});
+					}
+				}, 7000);
                 let imgs = this.imageList.map((value, index) => {
                     return {
                         name: "images" + index,
@@ -103,7 +116,7 @@
 						"phoneNumber": uni.getStorageSync("hasLogin")
 					},
                     success: (res) => {
-						console.log(res.data);
+						uni.setStorageSync("hasSubmit", 1);
 						uni.showToast({
 							title: "提交成功",
 							icon: "success",

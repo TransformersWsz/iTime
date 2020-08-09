@@ -1,9 +1,9 @@
 <template>
 	<view style="padding: 10rpx 20rpx;">
 		<uni-swipe-action style="margin-top: 30rpx;" v-for="(item, index) in listData" :key="index">
-			<uni-swipe-action-item :options="options" :show="isOpened" :auto-close="false" @click="swipeClick($event,index)">
+			<uni-swipe-action-item :options="options" :show="item.isOpened" :auto-close="false" @click="swipeClick($event,index)">
 				<uni-list style="border-bottom: 1px solid #e5e5e5;">
-					<uni-list-item :title="`保存时间: ${turnTs2Datetime(item.saveTimestamp)}`" :showMore="false" :showArrow="false" @clickIcon="clickIcon('asd')" />
+					<uni-list-item :title="`保存时间: ${turnTs2Datetime(item.saveTimestamp)}`" :showMore="true" :showArrow="false" @clickIcon="clickIcon(index)" />
 				</uni-list>
 			</uni-swipe-action-item>
 			
@@ -76,11 +76,6 @@
 		onReachBottom() {
 			console.log("on reach bottom");
 			this.setListData();
-			
-			// setTimeout(() => {
-				
-			// }, 300);
-			
 		},
 		
 		onPullDownRefresh() {
@@ -161,8 +156,7 @@
 						};
 					});
 					if (content.text === "复制") {
-						console.log(tempRecordData);
-						util.copyToClipboard(tempRecordData);
+						util.copyToClipboard(tempRecordData.reverse());
 					}
 					else {    // 数据分析
 						
@@ -179,8 +173,9 @@
 				}
 			},
 			
-			clickIcon(e) {
-				console.log(e);
+			clickIcon(index) {
+				this.listData[index].isOpened = true;
+				console.log(index);
 			},
 			
 			triggerCollapse(e) {
@@ -231,6 +226,7 @@
 									tmpData = tmpData.map(item => {
 										let tmpItem = {
 											"saveTimestamp": item.saveTimestamp,
+											"isOpened": false,
 											"recordData": item.recordData.map((gap, idx) => {
 												return {
 													"count": idx+1,
@@ -280,6 +276,7 @@
 							tmpData = tmpData.map(item => {
 								let tmpItem = {
 									"saveTimestamp": item.saveTimestamp,
+									"isOpened": false,
 									"recordData": item.recordData.map((gap, idx) => {
 										return {
 											"count": idx+1,
