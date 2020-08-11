@@ -101,47 +101,87 @@
 						});
 					}
 				}, 7000);
-                let imgs = this.imageList.map((value, index) => {
-                    return {
-                        name: "images" + index,
-                        uri: value
-                    }
-                })
-                // TODO 服务端限制上传文件一次最大不超过 2M, 图片一次最多不超过5张
-                uni.uploadFile({
-                    url: "https://itime.cloud/problem/upload",
-                    files: imgs,
-                    formData: {
-						"advice": this.advice,
-						"phoneNumber": uni.getStorageSync("hasLogin")
-					},
-                    success: (res) => {
-						uni.setStorageSync("hasSubmit", 1);
-						uni.showToast({
-							title: "提交成功",
-							icon: "success",
-							mask: true,
-							duration: 2000,
-							complete: () => {
-								setTimeout(()=>{
-									uni.navigateBack();
-								}, 1000);
-								
-							}
-						})
-                    },
-                    fail: (res) => {
-                        console.log(JSON.stringify(res));
-						uni.showModal({
-							title: "提交失败",
-							content: "网络异常，请稍后再试",
-							showCancel: false
-						});
-                    },
-                    complete() {
-                        uni.hideLoading()
-                    }
-                });
+                
+				if (this.imageList.length == 0) {
+					uni.request({
+						url: "https://itime.cloud/problem/advice",
+						data: {
+							"phoneNumber": uni.getStorageSync("hasLogin"),
+							"advice": this.advice
+						},
+						header: {
+							"content-type": "application/json"
+						},
+						method: "POST",
+						sslVerify: false,
+						success: (res) => {
+							uni.setStorageSync("hasSubmit", 1);
+							uni.showToast({
+								title: "提交成功",
+								icon: "success",
+								mask: true,
+								duration: 2000,
+								complete: () => {
+									setTimeout(()=>{
+										uni.navigateBack();
+									}, 1000);
+									
+								}
+							})
+						},
+						fail: (error) => {
+							console.log(error);
+							uni.showToast({
+								title: "网络异常，请稍后再试",
+								icon: "none"
+							});
+						}
+					});
+					
+				}
+				else {
+					let imgs = this.imageList.map((value, index) => {
+					    return {
+					        name: "images" + index,
+					        uri: value
+					    }
+					})
+					// TODO 服务端限制上传文件一次最大不超过 2M, 图片一次最多不超过5张
+					uni.uploadFile({
+					    url: "https://itime.cloud/problem/upload",
+					    files: imgs,
+					    formData: {
+							"advice": this.advice,
+							"phoneNumber": uni.getStorageSync("hasLogin")
+						},
+					    success: (res) => {
+							uni.setStorageSync("hasSubmit", 1);
+							uni.showToast({
+								title: "提交成功",
+								icon: "success",
+								mask: true,
+								duration: 2000,
+								complete: () => {
+									setTimeout(()=>{
+										uni.navigateBack();
+									}, 1000);
+									
+								}
+							});
+					    },
+					    fail: (res) => {
+					        console.log(JSON.stringify(res));
+							uni.showModal({
+								title: "提交失败",
+								content: "网络异常，请稍后再试",
+								showCancel: false
+							});
+					    },
+					    complete() {
+					        uni.hideLoading()
+					    }
+					});
+				}
             }
         }
     }
